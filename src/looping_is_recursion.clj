@@ -1,13 +1,28 @@
 (ns looping-is-recursion)
 
-(defn power [base exp]
-  ":(")
+(defn power [n k]
+  (let [helper (fn [acc num pot]
+                 (if (zero? pot)
+                   acc
+                     (recur (* acc num) num (dec pot))))]
+                 (helper 1 n k)))
 
-(defn last-element [a-seq]
-  ":(")
+(defn last-element [coll]
+  (if (empty? coll)
+    nil
+     (if (second coll)
+       (recur (rest coll))
+       (first coll))))
 
-(defn seq= [seq1 seq2]
-  ":(")
+(defn seq= [a-seq b-seq]
+  (cond
+   (and (empty? a-seq) (empty? b-seq))
+   true
+   (or (empty? a-seq) (empty? b-seq))
+   false
+   (= (first a-seq) (first b-seq))
+   (recur (rest a-seq) (rest b-seq))
+   :else false))
 
 (defn find-first-index [pred a-seq]
   ":(")

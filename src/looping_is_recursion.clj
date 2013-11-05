@@ -10,9 +10,9 @@
 (defn last-element [coll]
   (if (empty? coll)
     nil
-     (if (second coll)
-       (recur (rest coll))
-       (first coll))))
+     (if (empty? (rest coll))
+       (first coll)
+       (recur (rest coll)))))
 
 (defn seq= [a-seq b-seq]
   (cond
